@@ -1,0 +1,32 @@
+<app-hmcts-global-header [serviceName]="{
+  name: 'Manage HMCTS account',
+  url: '/'
+}" [navigation]="{
+  label: 'Account navigation',
+  items: [{
+      text: 'Sign out',
+      href: logoutLink
+  }]
+}" ></app-hmcts-global-header>
+
+<app-hmcts-primary-navigation [label]="" [items]="[{
+  text: 'Profile',
+  href: '/',
+  active: true
+},
+{
+  text: 'Organisation',
+  href: '/organisation',
+  active: false
+},
+{
+  text: 'Users',
+  href: '/users',
+  active: false
+},
+{
+  text: 'Payments',
+  href: '/payments',
+  active: false
+}
+]"></app-hmcts-primary-navigation>
