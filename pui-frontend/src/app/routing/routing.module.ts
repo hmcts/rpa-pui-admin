@@ -1,18 +1,14 @@
-import { CommonModule } from '@angular/common'
-import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { HmctsModule } from '../hmcts/hmcts.module'
-import { RouterModule, Routes } from '@angular/router'
-import { SharedModule } from '../shared/shared.module'
+import { HmctsModule } from '../hmcts/hmcts.module';
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
-import { AuthService } from '../auth/auth.service'
+import { AuthService } from '../auth/auth.service';
 
-import { HeaderComponent } from '../domain/components/header/header.component'
-
-import { DomainModule } from '../domain/domain.module'
-import { CaseResolve } from './resolve/case.resolve'
-
-
+import { DomainModule } from '../domain/domain.module';
+import { ProfileResolve } from './resolve/profile.resolve';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -20,33 +16,34 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrganisationComponent } from './organisation/organisation.component';
 import { UsersComponent } from './users/users.component';
 import { PaymentsComponent } from './payments/payments.component';
-
-
+import { ProfileService } from '../domain/services/profile.service';
 
 const routes: Routes = [
     {
         path: '',
+        resolve: {
+            profileData: ProfileResolve,
+        },
         component: ProfileComponent,
-        //canActivate: [AuthService],
-        data: { roles: ['caseworker-probatex'] }
+        canActivate: [AuthService],
+        data: { roles: ['caseworker-probatex'] },
     },
 
     {
         path: 'organisation',
         component: OrganisationComponent,
-        //canActivate: [AuthService],
+        canActivate: [AuthService],
     },
     {
         path: 'users',
         component: UsersComponent,
-        //canActivate: [AuthService],
+        canActivate: [AuthService],
     },
     {
         path: 'payments',
         component: PaymentsComponent,
-        //canActivate: [AuthService],
+        canActivate: [AuthService],
     },
-
 
     // {
     //     path: 'jurisdiction/:jur/casetype/:casetype/viewcase/:case_id',
@@ -68,15 +65,14 @@ const routes: Routes = [
     //         }
     //     ]
     // },
-
-]
+];
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forRoot(routes, {
             scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled'
+            anchorScrolling: 'enabled',
         }),
         RouterModule,
         CommonModule,
@@ -84,12 +80,10 @@ const routes: Routes = [
         ReactiveFormsModule,
         HmctsModule,
         DomainModule,
-        HttpModule
+        HttpModule,
     ],
     declarations: [ProfileComponent, OrganisationComponent, UsersComponent, PaymentsComponent],
-    providers: [
-
-    ],
-    exports: [RouterModule]
+    providers: [ProfileResolve, ProfileService],
+    exports: [RouterModule],
 })
-export class RoutingModule { }
+export class RoutingModule {}
