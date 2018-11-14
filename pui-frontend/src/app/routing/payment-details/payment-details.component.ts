@@ -12,7 +12,7 @@ export class PaymentDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.accountNumber = "xxx";
+    this.accountNumber = "1234567";
   }
 
 }
