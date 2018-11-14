@@ -109,14 +109,10 @@ export async function oauth(req: express.Request, res: express.Response, next: e
     }
 }
 
-export function user(req: EnhancedRequest, res: express.Response) {
-    const userJson = {
-        expires: req.auth.expires,
-        roles: req.auth.roles,
-        userId: req.auth.userId,
-    }
+export async function user(req: EnhancedRequest, res: express.Response) {
+    const details: any = await getUserDetails(req.auth.token)
     res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(userJson))
+    res.send(JSON.stringify(details.data))
 }
 
 // export function storeUrl(req: express.Request, res: express.Response, next: express.NextFunction) {
