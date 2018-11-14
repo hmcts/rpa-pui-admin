@@ -13,6 +13,7 @@ import { HmctsModule } from '../hmcts/hmcts.module'
 import { CaseService } from './services/case.service'
 
 import { HttpClientModule } from '@angular/common/http'
+import { AccountBarComponent } from './components/accountbar/accountbar.component';
 
 
 
@@ -21,8 +22,8 @@ import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
     imports: [CommonModule, RouterModule, ReactiveFormsModule, HmctsModule, HttpClientModule,],
-    exports: [HeaderComponent],
-    declarations: [HeaderComponent,],
+    exports: [AccountBarComponent, HeaderComponent],
+    declarations: [AccountBarComponent, HeaderComponent,],
     providers: [CaseService]
 })
 export class DomainModule { }

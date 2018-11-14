@@ -17,6 +17,7 @@ import { OrganisationComponent } from './organisation/organisation.component';
 import { UsersComponent } from './users/users.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileService } from '../domain/services/profile.service';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 
 const routes: Routes = [
     {
@@ -45,6 +46,23 @@ const routes: Routes = [
         canActivate: [AuthService],
     },
 
+    {
+        path: 'paymentdetails/:paymenttype',
+        children: [
+            {
+                path: ':section',
+                component: PaymentDetailsComponent
+            },
+            {
+                path: ':section/:section_item_id',
+                component: PaymentDetailsComponent
+            },
+            {
+                path: '',
+                component: PaymentDetailsComponent
+            }
+        ]
+    }
     // {
     //     path: 'jurisdiction/:jur/casetype/:casetype/viewcase/:case_id',
     //     resolve: {
@@ -82,8 +100,8 @@ const routes: Routes = [
         DomainModule,
         HttpModule,
     ],
-    declarations: [ProfileComponent, OrganisationComponent, UsersComponent, PaymentsComponent],
+    declarations: [ProfileComponent, OrganisationComponent, UsersComponent, PaymentsComponent, PaymentDetailsComponent],
     providers: [ProfileResolve, ProfileService],
     exports: [RouterModule],
 })
-export class RoutingModule {}
+export class RoutingModule { }
