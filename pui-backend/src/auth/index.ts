@@ -3,10 +3,11 @@ import * as exceptionFormatter from 'exception-formatter'
 import * as express from 'express'
 import * as jwtDecode from 'jwt-decode'
 import * as log4js from 'log4js'
+
 import { config } from '../config'
 import { http } from '../lib'
-import { errorInterceptor, successInterceptor } from '../lib/interceptors'
 import { EnhancedRequest } from '../lib/models'
+import { asyncReturnOrError } from '../lib/util'
 import { serviceTokenGenerator } from './serviceToken'
 
 const secret = process.env.IDAM_SECRET
@@ -109,14 +110,10 @@ export async function oauth(req: express.Request, res: express.Response, next: e
     }
 }
 
-export function user(req: EnhancedRequest, res: express.Response) {
-    const userJson = {
-        expires: req.auth.expires,
-        roles: req.auth.roles,
-        userId: req.auth.userId,
-    }
+export async function user(req: EnhancedRequest, res: express.Response) {
+    const details: any = await asyncReturnOrError(getUserDetails(req.auth.token), 'Failed to get user details', res, logger)
     res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(userJson))
+    res.send(JSON.stringify(details.data))
 }
 
 // export function storeUrl(req: express.Request, res: express.Response, next: express.NextFunction) {

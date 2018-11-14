@@ -93,6 +93,7 @@ const routes: Routes = [
             anchorScrolling: 'enabled',
         }),
         RouterModule,
+        SharedModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
