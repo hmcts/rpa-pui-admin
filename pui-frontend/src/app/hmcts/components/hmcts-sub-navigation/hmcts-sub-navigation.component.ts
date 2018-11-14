@@ -11,14 +11,11 @@ export class HmctsSubNavigationComponent {
     @Input() items = [
         {
             text: 'Nav item 1',
-            href: '#1',
+            href: 'summary',
             active: true
         }, {
             text: 'Nav item 2',
-            href: '#2'
-        }, {
-            text: 'Nav item 3',
-            href: '#3'
+            href: 'transactions'
         }
     ];
 
