@@ -1,4 +1,4 @@
-<app-accountbar [account]="accountNumber"></app-accountbar>
+
 
 
 <main id="content" role="main" class="govuk-main-wrapper">
@@ -7,5 +7,10 @@
   
   
 
+  <ng-container [ngSwitch]="selection" >
+    <app-summary-panel data-selector="summary-panel" *ngSwitchCase="'summary'" [panelData]="section" ></app-summary-panel>
+    <app-transactions-panel data-selector="transactions-panel" *ngSwitchCase="'transactions'" [panelData]="section"></app-transactions-panel> 
+</ng-container>
 
+  
 </main>

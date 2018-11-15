@@ -49,40 +49,14 @@ const routes: Routes = [
     {
         path: 'paymentdetails/:paymenttype',
         children: [
-            {
-                path: ':section',
-                component: PaymentDetailsComponent
-            },
-            {
-                path: ':section/:section_item_id',
-                component: PaymentDetailsComponent
-            },
+
             {
                 path: '',
                 component: PaymentDetailsComponent
             }
         ]
     }
-    // {
-    //     path: 'jurisdiction/:jur/casetype/:casetype/viewcase/:case_id',
-    //     resolve: {
-    //         caseData: CaseResolve
-    //     },
-    //     children: [
-    //         {
-    //             path: ':section',
-    //             component: ViewCaseComponent
-    //         },
-    //         {
-    //             path: ':section/:section_item_id',
-    //             component: ViewCaseComponent
-    //         },
-    //         {
-    //             path: '',
-    //             component: ViewCaseComponent
-    //         }
-    //     ]
-    // },
+
 ];
 
 @NgModule({
