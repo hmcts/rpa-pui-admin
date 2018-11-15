@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-payments',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class PaymentsComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(authservice: AuthService) {
+
+    console.log('authsv', authservice.getUser())
+  }
 
   ngOnInit() {
+
 
   }
 

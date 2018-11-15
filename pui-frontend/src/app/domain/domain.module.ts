@@ -14,6 +14,9 @@ import { CaseService } from './services/case.service'
 
 import { HttpClientModule } from '@angular/common/http'
 import { AccountBarComponent } from './components/accountbar/accountbar.component';
+import { SummaryPanelComponent } from './components/summary-panel/summary-panel.component';
+import { TransactionsPanelComponent } from './components/transactions-panel/transactions-panel.component';
+
 
 
 
@@ -22,8 +25,8 @@ import { AccountBarComponent } from './components/accountbar/accountbar.componen
 
 @NgModule({
     imports: [CommonModule, RouterModule, ReactiveFormsModule, HmctsModule, HttpClientModule,],
-    exports: [AccountBarComponent, HeaderComponent],
-    declarations: [AccountBarComponent, HeaderComponent,],
+    exports: [AccountBarComponent, HeaderComponent, SummaryPanelComponent, TransactionsPanelComponent],
+    declarations: [AccountBarComponent, HeaderComponent, SummaryPanelComponent, TransactionsPanelComponent,],
     providers: [CaseService]
 })
 export class DomainModule { }

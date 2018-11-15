@@ -10,12 +10,12 @@ export class HmctsSubNavigationComponent {
     @Input() label = 'Sub navigation';
     @Input() items = [
         {
-            text: 'Nav item 1',
-            href: 'summary',
+            text: 'Summary',
+            href: '/paymentdetails/summary',
             active: true
         }, {
-            text: 'Nav item 2',
-            href: 'transactions'
+            text: 'Transactions',
+            href: '/paymentdetails/transactions'
         }
     ];
 
