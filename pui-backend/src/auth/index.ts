@@ -1,14 +1,14 @@
-import axios, { AxiosPromise, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import * as exceptionFormatter from 'exception-formatter'
 import * as express from 'express'
 import * as jwtDecode from 'jwt-decode'
 import * as log4js from 'log4js'
-
 import { config } from '../config'
 import { http } from '../lib'
 import { EnhancedRequest } from '../lib/models'
 import { asyncReturnOrError } from '../lib/util'
 import { serviceTokenGenerator } from './serviceToken'
+import { getUserDetails } from './user'
 
 const secret = process.env.IDAM_SECRET
 const logger = log4js.getLogger('auth')
@@ -76,14 +76,6 @@ export async function getTokenFromCode(req: express.Request, res: express.Respon
     )
 }
 
-export async function getUserDetails(jwt: string): Promise<AxiosResponse> {
-    const options = {
-        headers: { Authorization: `Bearer ${jwt}` },
-    }
-
-    return await http.get(`${config.services.idam.idamApiUrl}/details`, options)
-}
-
 export async function oauth(req: express.Request, res: express.Response, next: express.NextFunction) {
     const session = req.session!
 
@@ -118,13 +110,6 @@ export async function oauth(req: express.Request, res: express.Response, next: e
     }
 }
 
-export async function user(req: EnhancedRequest, res: express.Response) {
-    const details: any = await asyncReturnOrError(getUserDetails(req.auth.token), 'Failed to get user details', res, logger)
-    res.setHeader('Content-Type', 'application/json')
-    details.data.roles = [...details.data.roles, 'PUI_CASE_MANAGER']
-    res.send(JSON.stringify(details.data))
-}
-
 // export function storeUrl(req: express.Request, res: express.Response, next: express.NextFunction) {
 //     const session = req.session
 //     session.url = req.path
@@ -145,6 +130,5 @@ export async function user(req: EnhancedRequest, res: express.Response) {
 export function logout(req: EnhancedRequest, res: express.Response) {
     const redirect = config.indexUrl ? config.indexUrl : '/'
     res.clearCookie(config.cookies.token)
-    console.log('ugh')
     res.redirect(redirect)
 }

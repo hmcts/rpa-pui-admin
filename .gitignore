@@ -9,6 +9,8 @@ pui-frontend/dist/*
 pui-backend/.history
 !pui-backend/.sessions/
 pui-backend/.sessions/*
+!pui-backend/test/coverage/
+pui-backend/test/coverage/*
 .history
 .directory
 .package-lock.json
