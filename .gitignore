@@ -12,7 +12,7 @@ pui-backend/.sessions/*
 .history
 .directory
 .package-lock.json
-pui-backend/.package-lock.json
-pui-fronteend/.package-lock.json
+pui-backend/package-lock.json
+pui-frontend/package-lock.json
 !.idea/
 .idea

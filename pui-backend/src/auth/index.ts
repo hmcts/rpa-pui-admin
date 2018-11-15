@@ -92,17 +92,25 @@ export async function oauth(req: express.Request, res: express.Response, next: e
 
         if (response.data.access_token) {
             logger.info('Getting user details')
-            const details: any = await getUserDetails(response.data.access_token)
-            res.cookie(config.cookies.token, response.data.access_token)
-            session.auth = {
-                roles: details.data.roles,
-                token: response.data.access_token,
-                userId: details.data.id,
-            }
+            const details = await asyncReturnOrError(
+                getUserDetails(response.data.access_token),
+                'Error getting user details',
+                res,
+                logger
+            )
 
-            session.save(() => {
-                res.redirect(config.indexUrl)
-            })
+            if (details) {
+                res.cookie(config.cookies.token, response.data.access_token)
+                session.auth = {
+                    roles: details.data.roles,
+                    token: response.data.access_token,
+                    userId: details.data.id,
+                }
+
+                session.save(() => {
+                    res.redirect(config.indexUrl)
+                })
+            }
         }
     } catch (e) {
         logger.error('Error:', e)
@@ -113,6 +121,7 @@ export async function oauth(req: express.Request, res: express.Response, next: e
 export async function user(req: EnhancedRequest, res: express.Response) {
     const details: any = await asyncReturnOrError(getUserDetails(req.auth.token), 'Failed to get user details', res, logger)
     res.setHeader('Content-Type', 'application/json')
+    details.data.roles = [...details.data.roles, 'PUI_CASE_MANAGER']
     res.send(JSON.stringify(details.data))
 }
 
