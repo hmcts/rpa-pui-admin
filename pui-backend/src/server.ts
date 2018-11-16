@@ -10,8 +10,8 @@ import * as sessionFileStore from 'session-file-store'
 
 // PUI imports
 import * as auth from './auth'
+import * as user from './auth/user'
 import { config } from './config'
-
 
 const app = express()
 const PORT = config.port
@@ -77,7 +77,8 @@ app.use(auth.attach)
 
 app.get('/api/logout', auth.logout)
 
-app.get('/api/user', auth.user)
+app.get('/api/user/profile', user.profile)
+app.get('/api/user', user.get)
 
 app.listen(PORT, () => {
     logger.info(`listening on port ${PORT}`)

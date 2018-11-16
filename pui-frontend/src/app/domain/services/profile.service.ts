@@ -12,7 +12,7 @@ export class ProfileService {
     }
 
     fetch(): Observable<Object> {
-        const url = `${this.apiBaseUrl}/api/user`;
+        const url = `${this.apiBaseUrl}/api/user/profile`;
         return this.httpClient.get(url);
     }
 }

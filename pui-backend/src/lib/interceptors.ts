@@ -19,7 +19,7 @@ export function successInterceptor(response) {
     const url = shorten(response.config.url, config.maxLogLine)
 
     logger.info(`Success on ${response.config.method.toUpperCase()} to ${url}`)
-    console.log(response.headers)
+
     return response
 }
 
