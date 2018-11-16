@@ -29,7 +29,7 @@ export class AccountBarComponent implements OnInit {
         });
 
 
-        this.accountSubscription = this.detailbarService.authChange.subscribe(authStatus => {
+        this.accountSubscription = this.detailbarService.accountChange.subscribe(authStatus => {
             this.accountLabel = authStatus;
         });
     }

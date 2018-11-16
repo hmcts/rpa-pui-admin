@@ -6,14 +6,14 @@ import { Subject } from 'rxjs';
 })
 export class DetailbarService {
 
-  authChange = new Subject<string>();
+  accountChange = new Subject<string>();
   constructor() { }
 
 
 
 
   updateAccountDetail(account: string) {
-    this.authChange.next(account);
+    this.accountChange.next(account);
   }
 
 }
