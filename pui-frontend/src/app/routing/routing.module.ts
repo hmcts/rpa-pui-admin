@@ -45,9 +45,18 @@ const routes: Routes = [
         component: PaymentsComponent,
         canActivate: [AuthService],
     },
-
     {
         path: 'paymentdetails/:paymenttype',
+        children: [
+
+            {
+                path: '',
+                component: PaymentDetailsComponent
+            }
+        ]
+    },
+    {
+        path: 'paymentdetails/:paymenttype/:account',
         children: [
 
             {

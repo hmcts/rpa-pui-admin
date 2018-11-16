@@ -1,7 +1,7 @@
-<div class="hmcts-details-bar">
+<div *ngIf="isVisible" class="hmcts-details-bar">
     <div class="hmcts-details-bar__container">  
       <div class="hmcts-details-bar__details">
-        <span class="hmcts-details-bar__reference">PBA0241163</span>
+        <span class="hmcts-details-bar__reference"> {{accountLabel}}</span>
       </div>
     </div>
   </div>

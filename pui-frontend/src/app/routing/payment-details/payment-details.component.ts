@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DetailbarService } from 'src/app/domain/services/detailbar.service';
 
 @Component({
   selector: 'app-payment-details',
@@ -12,15 +13,20 @@ export class PaymentDetailsComponent implements OnInit {
   selection: string = 'summary';
   section = {}
 
-  constructor(public router: Router, private route: ActivatedRoute) {
+  constructor(public router: Router, private route: ActivatedRoute, private detailbarService: DetailbarService) {
     this.route.params.subscribe(params => {
-      this.selection = params.paymenttype || null
+
+      this.selection = params.paymenttype
+      this.accountNumber = params.account
       console.log('params', params)
     });
   }
 
   ngOnInit() {
-    this.accountNumber = "1234567";
+
+    if (this.accountNumber)
+      this.detailbarService.updateAccountDetail(this.accountNumber)
+
   }
 
 }
