@@ -29,7 +29,7 @@
     "ngx-md": "^7.0.0",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.3.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
